@@ -1,0 +1,77 @@
+﻿@page "/expense-tracker"
+@inject ExpenseHound.Services.ExpenseService ExpenseService
+@using ExpenseHound.Models
+
+<h3>Expense Tracker</h3>
+
+<div>
+    <label>Expense Type: </label>
+    <select @bind="newExpense.ExpenseType">
+        <placeholder>Select an Expense Type</placeholder>
+        <option value="OneTime">One Time</option>
+        <option value="Recurring">Recurring</option>
+        <option value="Fixed">Fixed</option>
+        <option value="Variable">Variable</option>
+    </select>
+
+    <label>Description: </label>
+    <input @bind="newExpense.Description" placeholder="Enter a Description" />
+
+    <label>Amount: $</label>
+    <input type="number" @bind="newExpense.Amount" placeholder="$50.00" />
+
+    <label>Category: </label>
+    <select @bind="newExpense.Category">
+        <option value="Groceries">Groceries</option>
+        <option value="Utilities">Utilities</option>
+        <option value="Rent">Rent</option>
+        <option value="Other">Other</option>
+    </select>
+
+    <label>Date: </label>
+    <input type="date" @bind="newExpense.Date" />
+
+    <button @onclick="AddExpense">Add Expense</button>
+</div>
+
+
+<h4>Expenses</h4>
+<table class="table table-striped table-dark">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Expense Type</th>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date</th>
+            <th scope="col">Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var expense in ExpenseService.GetExpenses())
+        {
+            <tr>
+                <td scope="row">@expense.ExpenseType</td>
+                <td>@expense.Description</td>
+                <td>@expense.Amount</td>
+                <td>@expense.Date.ToShortDateString()</td>
+                <td>@expense.Category</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Total Expenses:</h4><span> $@ExpenseService.GetTotal()</span>
+
+@code {
+    private Expense newExpense = new Expense
+        {
+            Date = DateTime.Now
+        };
+
+
+    private void AddExpense()
+    {
+        ExpenseService.AddExpense(newExpense);
+        newExpense = new Expense { Date = DateTime.Now };
+    }
+}

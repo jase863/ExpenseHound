@@ -2,62 +2,92 @@
 @inject ExpenseHound.Services.ExpenseService ExpenseService
 @using ExpenseHound.Models
 
+<!-- Error flag -->
+@if (string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
+
 <h3>Expense Tracker</h3>
 
-<div class="row g-6">
-    <div class="col-md">
-        <div class="form-floating">
-            <select class="form-select" id="floatingSelect" @bind="newExpense.ExpenseType">
-                <option selected>Choose an Expense Type...</option>
-                <option value="OneTime">One Time</option>
-                <option value="Recurring">Recurring</option>
-                <option value="Fixed">Fixed</option>
-                <option value="Variable">Variable</option>
-            </select>
-            <label for="floatingSelect">Expense Type</label>
-        </div>
-    </div>
+<EditForm Model="newExpense" OnValidSubmit="AddExpense" OnInvalidSubmit="HandleInvalidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-    <div class="col-md">
-        <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInputGrid" @bind="newExpense.Description" placeholder="Enter a Description" />
-            <label for="floatingInputGrid">Description</label>
+    <div class="row g-6">
+        <!-- Expense Type -->
+        <div class="col-md">
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelect" @bind="newExpense.ExpenseType">
+                    <option selected>Choose an Expense Type...</option>
+                    <option value="OneTime">One Time</option>
+                    <option value="Recurring">Recurring</option>
+                    <option value="Fixed">Fixed</option>
+                    <option value="Variable">Variable</option>
+                </select>
+                <label for="floatingSelect">Expense Type</label>
+                <!-- Validation Message -->
+                <ValidationMessage For="@(() => newExpense.ExpenseType)" />
+            </div>
         </div>
-    </div>
 
-    <div class="col-md">
-        <div class="form-floating">
-            <input type="number" class="form-control" id="floatingInputGrid" @bind="newExpense.Amount" placeholder="$50.00" />
-            <label for="floatingInputGrid">Amount</label>
+        <!-- Expense Name / Description -->
+        <div class="col-md">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInputGrid" @bind="newExpense.Description" placeholder="Enter a Description" />
+                <label for="floatingInputGrid">Description</label>
+                <!-- Validation Message for description -->
+                <ValidationMessage For="@(() => newExpense.Description)" />
+            </div>
         </div>
-    </div>
 
-    <div class="col-md">
-        <div class="form-floating">
-            <select class="form-select" id="floatingSelect" @bind="newExpense.Category">
-                <option selected>Choose a Category...</option>
-                <option value="Groceries">Groceries</option>
-                <option value="Utilities">Utilities</option>
-                <option value="Rent">Rent</option>
-                <option value="Other">Other</option>
-            </select>
-            <label for="floatingSelect">Category</label>
+        <!-- Expense Amount -->
+        <div class="col-md">
+            <div class="form-floating">
+                <input type="number" class="form-control" id="floatingInputGrid" @bind="newExpense.Amount" placeholder="$50.00" />
+                <label for="floatingInputGrid">Amount</label>
+                <!-- Validation Message for amount -->
+                <ValidationMessage For="@(() => newExpense.Amount)" />
+            </div>
         </div>
-    </div>
 
-    <div class="col-md">
-        <div class="form-floating">
-            <input type="date" class="form-control" id="floatingSelect" @bind="newExpense.Date" />
-            <label for="floatingSelect">Date</label>
+        <!-- Expense Category -->
+        <div class="col-md">
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelect" @bind="newExpense.Category">
+                    <option selected>Choose a Category...</option>
+                    <option value="Groceries">Groceries</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Rent">Rent</option>
+                    <option value="Other">Other</option>
+                </select>
+                <label for="floatingSelect">Category</label>
+                <!-- Validation Message for Category -->
+                <ValidationMessage For="@(() => newExpense.Category)" />
+            </div>
         </div>
-    </div>
 
-    <div class="col-md">
-        <div class="form-floating">
-            <button class="form-control btn btn-primary" @onclick="AddExpense">Add Expense</button>
+        <!-- Expense Date -->
+        <div class="col-md">
+            <div class="form-floating">
+                <input type="date" class="form-control" id="floatingSelect" @bind="newExpense.Date" />
+                <label for="floatingSelect">Date</label>
+                <!-- Validation Message for Date -->
+                <ValidationMessage For="@(() => newExpense.Date)" />
+            </div>
+        </div>
+
+        <!-- Expense Button -->
+        <div class="col-md">
+            <div class="form-floating">
+                <button class="form-control btn btn-primary" @onclick="AddExpense">Add Expense</button>
+            </div>
         </div>
     </div>
-</div>
+</EditForm>
+
 
 
 <h4>Expenses</h4>
@@ -88,15 +118,31 @@
 <h4>Total Expenses:</h4><span> $@ExpenseService.GetTotal()</span>
 
 @code {
+    private string errorMessage;
+
+    /// <summary>
+    /// Initializes a new expense with the current date.
+    /// </summary>
     private Expense newExpense = new Expense
         {
             Date = DateTime.Now
         };
 
 
+    /// <summary>
+    /// Adds an Expense to the Expense List
+    /// </summary>
     private void AddExpense()
     {
         ExpenseService.AddExpense(newExpense);
         newExpense = new Expense { Date = DateTime.Now };
+    }
+
+    /// <summary>
+    /// Handles an invalid submit
+    /// </summary>
+    private void HandleInvalidSubmit()
+    {
+        errorMessage = "Please correct the errors and try again.";
     }
 }

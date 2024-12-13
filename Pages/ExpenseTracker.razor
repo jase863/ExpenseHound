@@ -4,34 +4,59 @@
 
 <h3>Expense Tracker</h3>
 
-<div>
-    <label>Expense Type: </label>
-    <select @bind="newExpense.ExpenseType">
-        <placeholder>Select an Expense Type</placeholder>
-        <option value="OneTime">One Time</option>
-        <option value="Recurring">Recurring</option>
-        <option value="Fixed">Fixed</option>
-        <option value="Variable">Variable</option>
-    </select>
+<div class="row g-6">
+    <div class="col-md">
+        <div class="form-floating">
+            <select class="form-select" id="floatingSelect" @bind="newExpense.ExpenseType">
+                <option selected>Choose an Expense Type...</option>
+                <option value="OneTime">One Time</option>
+                <option value="Recurring">Recurring</option>
+                <option value="Fixed">Fixed</option>
+                <option value="Variable">Variable</option>
+            </select>
+            <label for="floatingSelect">Expense Type</label>
+        </div>
+    </div>
 
-    <label>Description: </label>
-    <input @bind="newExpense.Description" placeholder="Enter a Description" />
+    <div class="col-md">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputGrid" @bind="newExpense.Description" placeholder="Enter a Description" />
+            <label for="floatingInputGrid">Description</label>
+        </div>
+    </div>
 
-    <label>Amount: $</label>
-    <input type="number" @bind="newExpense.Amount" placeholder="$50.00" />
+    <div class="col-md">
+        <div class="form-floating">
+            <input type="number" class="form-control" id="floatingInputGrid" @bind="newExpense.Amount" placeholder="$50.00" />
+            <label for="floatingInputGrid">Amount</label>
+        </div>
+    </div>
 
-    <label>Category: </label>
-    <select @bind="newExpense.Category">
-        <option value="Groceries">Groceries</option>
-        <option value="Utilities">Utilities</option>
-        <option value="Rent">Rent</option>
-        <option value="Other">Other</option>
-    </select>
+    <div class="col-md">
+        <div class="form-floating">
+            <select class="form-select" id="floatingSelect" @bind="newExpense.Category">
+                <option selected>Choose a Category...</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Rent">Rent</option>
+                <option value="Other">Other</option>
+            </select>
+            <label for="floatingSelect">Category</label>
+        </div>
+    </div>
 
-    <label>Date: </label>
-    <input type="date" @bind="newExpense.Date" />
+    <div class="col-md">
+        <div class="form-floating">
+            <input type="date" class="form-control" id="floatingSelect" @bind="newExpense.Date" />
+            <label for="floatingSelect">Date</label>
+        </div>
+    </div>
 
-    <button @onclick="AddExpense">Add Expense</button>
+    <div class="col-md">
+        <div class="form-floating">
+            <button class="form-control btn btn-primary" @onclick="AddExpense">Add Expense</button>
+        </div>
+    </div>
 </div>
 
 

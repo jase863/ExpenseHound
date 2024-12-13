@@ -1,1 +1,23 @@
-﻿
+﻿.container {
+    background-color: lightslategray;
+}
+
+.expense-body {
+    display: contents;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    max-width: 300px;
+}
+
+.expense-body label {
+    margin-right: 10px;
+    margin-left: 3px;
+}
+
+@media (max-width: 900px) {
+    .expense-body {
+        flex-direction: column;
+        align-items: center;
+    }
+}

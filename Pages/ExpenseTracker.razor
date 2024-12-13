@@ -3,7 +3,7 @@
 @using ExpenseHound.Models
 
 <!-- Error flag -->
-@if (string.IsNullOrEmpty(errorMessage))
+@if (!string.IsNullOrEmpty(errorMessage))
 {
     <div class="alert alert-danger" role="alert">
         @errorMessage
@@ -82,7 +82,7 @@
         <!-- Expense Button -->
         <div class="col-md">
             <div class="form-floating">
-                <button class="form-control btn btn-primary" @onclick="AddExpense">Add Expense</button>
+                <button class="form-control btn btn-primary" type="submit">Add Expense</button>
             </div>
         </div>
     </div>
@@ -107,7 +107,7 @@
             <tr>
                 <td scope="row">@expense.ExpenseType</td>
                 <td>@expense.Description</td>
-                <td>@expense.Amount</td>
+                <td>$@expense.Amount</td>
                 <td>@expense.Date.ToShortDateString()</td>
                 <td>@expense.Category</td>
             </tr>
@@ -119,12 +119,14 @@
 
 @code {
     private string errorMessage;
+    private bool descriptionError;
 
     /// <summary>
     /// Initializes a new expense with the current date.
     /// </summary>
     private Expense newExpense = new Expense
         {
+            Description = "Enter a Description",
             Date = DateTime.Now
         };
 
@@ -134,8 +136,48 @@
     /// </summary>
     private void AddExpense()
     {
-        ExpenseService.AddExpense(newExpense);
-        newExpense = new Expense { Date = DateTime.Now };
+
+        //Handle expense type
+        if (newExpense.ExpenseType == "Choose an Expense Type...")
+        {
+            errorMessage = "Please select an Expense Type.";
+            return;
+        }
+        //Handle Description error.
+        if (newExpense.Description == "Enter a Description")
+        {
+            descriptionError = true;
+            return;
+        }
+        //Handle amount error.
+        if (newExpense.Amount == 0)
+        {
+            errorMessage = "Please enter an amount.";
+            return;
+        }
+        //Handle Category error.
+        if (newExpense.Category == "Choose a Category...")
+        {
+            errorMessage = "Please select a Category.";
+            return;
+        }
+
+        //Reset error messages
+        errorMessage = null;
+        descriptionError = false;
+
+        //Add the expense to the service
+        ExpenseService.AddExpense(new Expense
+            {
+                ExpenseType = newExpense.ExpenseType,
+                Description = newExpense.Description,
+                Amount = newExpense.Amount,
+                Category = newExpense.Category,
+                Date = newExpense.Date
+            });
+
+        //Reset form
+        newExpense = new Expense { Description = "Enter a Description", Date = DateTime.Now };
     }
 
     /// <summary>

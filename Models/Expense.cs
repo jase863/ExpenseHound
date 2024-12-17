@@ -4,6 +4,7 @@ namespace ExpenseHound.Models
 {
     public class Expense
     {
+        public string? Id { get; set; }
         // Simple name of expense?
         [Required(ErrorMessage = "Please enter a name of the expense.")]
         public string Description { get; set; }

@@ -1,5 +1,6 @@
 ﻿@page "/expense-tracker"
 @inject ExpenseHound.Services.ExpenseService ExpenseService
+@inject HttpClient Http
 @using ExpenseHound.Models
 
 <!-- Error flag -->
@@ -91,6 +92,12 @@
 
 
 <h4>Expenses</h4>
+
+@if (expenses == null)
+{
+    <p>Loading...</p>
+}
+
 <table class="table table-striped table-dark">
     <thead class="thead-dark">
         <tr>
@@ -102,24 +109,32 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var expense in ExpenseService.GetExpenses())
+        @if (expenses != null && expenses.Any())
         {
-            <tr>
-                <td scope="row">@expense.ExpenseType</td>
-                <td>@expense.Description</td>
-                <td>$@expense.Amount</td>
-                <td>@expense.Date.ToShortDateString()</td>
-                <td>@expense.Category</td>
-            </tr>
+            @foreach (var expense in expenses)
+            {
+                <tr>
+                    <td scope="row">@expense.ExpenseType</td>
+                    <td>@expense.Description</td>
+                    <td>$@expense.Amount</td>
+                    <td>@expense.Date.ToShortDateString()</td>
+                    <td>@expense.Category</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <p>No Expenses Available</p>
         }
     </tbody>
 </table>
 
-<h4>Total Expenses:</h4><span> $@ExpenseService.GetTotal()</span>
 
 @code {
     private string errorMessage;
     private bool descriptionError;
+
+    private List<Expense> expenses;
 
     /// <summary>
     /// Initializes a new expense with the current date.
@@ -130,44 +145,49 @@
             Date = DateTime.Now
         };
 
+    protected override async Task OnInitializedAsync()
+    {
+        expenses = await ExpenseService.GetExpensesAsync();
+    }
+
 
     /// <summary>
     /// Adds an Expense to the Expense List
     /// </summary>
-    private void AddExpense()
+    private async Task AddExpense()
     {
 
-        //Handle expense type
-        if (newExpense.ExpenseType == "Choose an Expense Type...")
-        {
-            errorMessage = "Please select an Expense Type.";
-            return;
-        }
-        //Handle Description error.
-        if (newExpense.Description == "Enter a Description")
-        {
-            descriptionError = true;
-            return;
-        }
-        //Handle amount error.
-        if (newExpense.Amount == 0)
-        {
-            errorMessage = "Please enter an amount.";
-            return;
-        }
-        //Handle Category error.
-        if (newExpense.Category == "Choose a Category...")
-        {
-            errorMessage = "Please select a Category.";
-            return;
-        }
+        // Handle expense type
+        // if (newExpense.ExpenseType == "Choose an Expense Type...")
+        // {
+        //     errorMessage = "Please select an Expense Type.";
+        //     return;
+        // }
+        // Handle Description error.
+        // if (newExpense.Description == "Enter a Description")
+        // {
+        //     descriptionError = true;
+        //     return;
+        // }
+        // Handle amount error.
+        // if (newExpense.Amount == 0)
+        // {
+        //     errorMessage = "Please enter an amount.";
+        //     return;
+        // }
+        // Handle Category error.
+        // if (newExpense.Category == "Choose a Category...")
+        // {
+        //     errorMessage = "Please select a Category.";
+        //     return;
+        // }
 
         //Reset error messages
         errorMessage = null;
         descriptionError = false;
 
         //Add the expense to the service
-        ExpenseService.AddExpense(new Expense
+        await ExpenseService.CreateExpenseAsync(new Expense
             {
                 ExpenseType = newExpense.ExpenseType,
                 Description = newExpense.Description,
@@ -179,6 +199,7 @@
         //Reset form
         newExpense = new Expense { Description = "Enter a Description", Date = DateTime.Now };
     }
+
 
     /// <summary>
     /// Handles an invalid submit

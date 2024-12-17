@@ -17,27 +17,27 @@ namespace ExpenseHound.Services
         //Get all expenses
         public async Task<List<Expense>> GetExpensesAsync()
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("ExpenseAPI");
 
-            return await client.GetFromJsonAsync<List<Expense>>("expenses");
+            return await client.GetFromJsonAsync<List<Expense>>("expense");
         }
 
 
         //Get a single Expense by ID
         public async Task<Expense> GetExpenseAsync(string id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("ExpenseAPI");
 
-            return await client.GetFromJsonAsync<Expense>($"expenses/{id}");
+            return await client.GetFromJsonAsync<Expense>($"expense/{id}");
         }
 
 
         //Create a new expense
         public async Task<Expense> CreateExpenseAsync(Expense expense)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("ExpenseAPI");
 
-            var response = await client.PostAsJsonAsync("expenses/create", expense);
+            var response = await client.PostAsJsonAsync("expense/", expense);
             return await response.Content.ReadFromJsonAsync<Expense>();
         }
 
@@ -45,18 +45,18 @@ namespace ExpenseHound.Services
         //Update an existing expense
         public async Task UpdateExpenseAsync(string id, Expense expense)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("ExpenseAPI");
 
-            await client.PutAsJsonAsync($"expenses/update/{id}", expense);
+            await client.PutAsJsonAsync($"expense/update/{id}", expense);
         }
 
 
         //Delete an existing expense
         public async Task DeleteExpenseAsync(string id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("ExpenseAPI");
 
-            await client.DeleteAsync($"expenses/delete/{id}");
+            await client.DeleteAsync($"expense/delete/{id}");
         }
     }
 }

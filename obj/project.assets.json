@@ -588,7 +588,7 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.10": {
+      "Microsoft.NET.ILLink.Tasks/8.0.8": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -1424,7 +1424,7 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.10": {
+      "Microsoft.NET.ILLink.Tasks/8.0.8": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -2675,10 +2675,10 @@
         "microsoft.jsinterop.webassembly.nuspec"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/8.0.10": {
-      "sha512": "xT8jYjlroY7SLbGtoV9vUTVW/TPgodL4Egc31a444Xe0TMytLZ3UlKQ0kxMZsy/CrWsFB6wtKnSG1SsXcWreew==",
+    "Microsoft.NET.ILLink.Tasks/8.0.8": {
+      "sha512": "P8wR6MUWwYXIjPJuBaZgo5zlI/GWI6QEAo6NyVIbPefa9CCkohYu7dP2rD/mrqnjEqfRHyl+h9VZrDoGpELqYg==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/8.0.10",
+      "path": "microsoft.net.illink.tasks/8.0.8",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -2692,7 +2692,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.8.0.10.nupkg.sha512",
+        "microsoft.net.illink.tasks.8.0.8.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -3230,7 +3230,7 @@
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 8.0.10",
       "Microsoft.Extensions.Http >= 9.0.0",
       "Microsoft.IdentityModel.Tokens >= 8.3.0",
-      "Microsoft.NET.ILLink.Tasks >= 8.0.10",
+      "Microsoft.NET.ILLink.Tasks >= 8.0.8",
       "Microsoft.NET.Sdk.WebAssembly.Pack >= 8.0.11",
       "MongoDB.Driver >= 3.1.0",
       "System.IdentityModel.Tokens.Jwt >= 8.3.0"
@@ -3301,7 +3301,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[8.0.10, )",
+            "version": "[8.0.8, )",
             "autoReferenced": true
           },
           "Microsoft.NET.Sdk.WebAssembly.Pack": {
@@ -3341,7 +3341,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

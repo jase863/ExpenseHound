@@ -1,0 +1,61 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Infra\\source\\repos\\ExpenseHound2\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\Infra\\source\\repos\\ExpenseHound2\\obj\\Debug\\net8.0\\compressed\\c3h26tdv68.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\Infra\\source\\repos\\ExpenseHound2\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ExpenseHound.styles.css",
+      "PackagePath": "staticwebassets\\ExpenseHound.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\Infra\\source\\repos\\ExpenseHound2\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\Infra\\source\\repos\\ExpenseHound2\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Infra\\source\\repos\\ExpenseHound2\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Infra\\source\\repos\\ExpenseHound2\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\Infra\\source\\repos\\ExpenseHound2\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Users\\Infra\\source\\repos\\ExpenseHound2\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\Infra\\source\\repos\\ExpenseHound2\\wwwroot\\sample-data\\weather.json",
+      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ExpenseHound.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ExpenseHound.props",
+      "PackagePath": "build\\ExpenseHound.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ExpenseHound.props",
+      "PackagePath": "buildMultiTargeting\\ExpenseHound.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ExpenseHound.props",
+      "PackagePath": "buildTransitive\\ExpenseHound.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

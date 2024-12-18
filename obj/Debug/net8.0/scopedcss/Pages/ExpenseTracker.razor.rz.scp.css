@@ -1,0 +1,27 @@
+.container[b-6d2d09oul9] {
+    background-color: lightslategray;
+}
+
+.expense-body[b-6d2d09oul9] {
+    display: contents;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    max-width: 300px;
+}
+
+.expense-body label[b-6d2d09oul9] {
+    margin-right: 10px;
+    margin-left: 3px;
+}
+
+input:invalid[b-6d2d09oul9], select:invalid[b-6d2d09oul9] {
+    border-color: red;
+}
+
+@media (max-width: 900px) {
+    .expense-body[b-6d2d09oul9] {
+        flex-direction: column;
+        align-items: center;
+    }
+}
